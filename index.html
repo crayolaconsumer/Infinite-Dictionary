@@ -16,6 +16,20 @@
             </button>
         </div>
 
+        <button id="theme-toggle" class="theme-toggle">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+
+        <div id="history-container" class="history-container" style="display: none;">
+            <h4>Recent Searches</h4>
+            <div id="history-list" class="related-words-list"></div>
+        </div>
+
+        <div id="favorites-container" class="favorites-container" style="display: none;">
+            <h4>Favorite Words</h4>
+            <div id="favorites-list" class="related-words-list"></div>
+        </div>
+
         <div id="loader" class="loader-container" style="display: none;">
             <div class="loader"></div>
         </div>
@@ -25,18 +39,57 @@
         </div>
 
         <div id="word-container" class="word-display">
-            <div class="word-image-container">
-                <img id="word-image" src="" alt="" />
+            <div class="skeleton-loader">
+                <div class="skeleton-image"></div>
+                <div class="skeleton-details">
+                    <div class="skeleton-line skeleton-title"></div>
+                    <div class="skeleton-line skeleton-phonetic"></div>
+                    <div class="skeleton-line"></div>
+                    <div class="skeleton-line"></div>
+                    <div class="skeleton-line"></div>
+                    <div class="skeleton-line short"></div>
+                </div>
             </div>
-            <div class="word-details">
-                <h2 id="word-title"></h2>
-                <p id="word-phonetic"></p>
-                <div id="word-definition"></div>
+            <div class="actual-content">
+                <div class="word-image-container">
+                    <img id="word-image" src="" alt="" />
+                </div>
+                <div class="word-details">
+                    <div class="word-title-container">
+                        <h2 id="word-title"></h2>
+                        <button id="favorite-button" class="favorite-button" style="display: none;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                        </button>
+                    </div>
+                    <div class="phonetic-container">
+                        <p id="word-phonetic"></p>
+                        <button id="audio-button" class="audio-button" style="display: none;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                        </button>
+                    </div>
+                    <div id="word-definition"></div>
+
+                    <div id="synonyms-container" class="related-words-container" style="display: none;">
+                        <h4>Synonyms</h4>
+                        <div id="synonyms-list" class="related-words-list"></div>
+                    </div>
+
+                    <div id="antonyms-container" class="related-words-container" style="display: none;">
+                        <h4>Antonyms</h4>
+                        <div id="antonyms-list" class="related-words-list"></div>
+                    </div>
+
+                    <div id="etymology-container" class="etymology-container" style="display: none;">
+                        <h4>Word Origin</h4>
+                        <p id="etymology-text"></p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="script.js"></script>
+    
 </body>
 </html>

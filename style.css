@@ -8,6 +8,7 @@ body {
     min-height: 100vh;
     padding: 2rem;
     box-sizing: border-box;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container {
@@ -21,6 +22,7 @@ body {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     border-radius: 50px;
     overflow: hidden;
+    transition: box-shadow 0.3s ease;
 }
 
 .search-box {
@@ -31,6 +33,7 @@ body {
     background: #1e1e1e;
     color: #e0e0e0;
     outline: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .search-button {
@@ -45,8 +48,93 @@ body {
     transition: background-color 0.3s ease;
 }
 
-.search-button:hover {
-    background: #a06cd5;
+.search-button:active {
+    transform: scale(0.95);
+}
+
+.word-title-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.favorite-button {
+    background: none;
+    border: none;
+    color: #a0a0a0;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.favorite-button.favorited {
+    color: #ff4d4d;
+    fill: #ff4d4d;
+    transform: scale(1.2);
+}
+
+.favorite-button:hover {
+    color: #bb86fc;
+}
+
+.favorite-button:active {
+    transform: scale(0.9);
+}
+
+.favorites-container {
+    margin-top: 2rem;
+}
+
+.favorites-container h4 {
+    color: #bb86fc;
+    border-bottom: 1px solid #333;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    transition: color 0.3s ease, border-bottom-color 0.3s ease;
+}
+
+.favorites-container .related-words-list a {
+    background: #333;
+    color: #e0e0e0;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.favorites-container .related-words-list a:hover {
+    background: #bb86fc;
+    color: #121212;
+    transform: translateY(-2px);
+}
+
+.history-container {
+    margin-bottom: 2rem;
+}
+
+.history-container h4 {
+    color: #bb86fc;
+    border-bottom: 1px solid #333;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    transition: color 0.3s ease, border-bottom-color 0.3s ease;
+}
+
+.history-container .related-words-list a {
+    background: #333;
+    color: #e0e0e0;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.history-container .related-words-list a:hover {
+    background: #bb86fc;
+    color: #121212;
+    transform: translateY(-2px);
 }
 
 .word-display {
@@ -54,9 +142,74 @@ body {
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-    display: none; /* Hidden by default */
+    display: flex;
     flex-direction: column;
     transition: all 0.5s ease-in-out;
+    min-height: 400px;
+}
+
+.skeleton-loader {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 2rem;
+}
+
+.skeleton-image {
+    width: 100%;
+    height: 300px;
+    background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+.skeleton-details {
+    padding: 0 1rem;
+}
+
+.skeleton-line {
+    height: 1.2em;
+    background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    border-radius: 4px;
+    margin-bottom: 0.8rem;
+}
+
+.skeleton-line.skeleton-title {
+    width: 70%;
+    height: 2.5em;
+    margin-bottom: 1.5rem;
+}
+
+.skeleton-line.skeleton-phonetic {
+    width: 40%;
+    height: 1.5em;
+    margin-bottom: 2rem;
+}
+
+.skeleton-line.short {
+    width: 60%;
+}
+
+@keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+.actual-content {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* Light Theme Skeleton */
+body.light-theme .skeleton-image,
+body.light-theme .skeleton-line {
+    background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+    background-size: 200% 100%;
 }
 
 .word-image-container {
@@ -85,12 +238,40 @@ body {
     font-size: 3rem;
     margin: 0 0 0.5rem 0;
     color: #bb86fc;
+    transition: color 0.3s ease;
 }
 
 #word-phonetic {
     font-style: italic;
     color: #a0a0a0;
+    margin-bottom: 0;
+    transition: color 0.3s ease;
+}
+
+.phonetic-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
     margin-bottom: 1.5rem;
+}
+
+.audio-button {
+    background: none;
+    border: none;
+    color: #bb86fc;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.audio-button:hover {
+    color: #a06cd5;
+}
+
+.audio-button:active {
+    transform: scale(0.9);
 }
 
 #word-definition {
@@ -99,7 +280,7 @@ body {
 }
 
 #word-definition a {
-    color: #e0e0e0; /* Regular text color */
+    color: #e0e0e0;
     text-decoration: none;
     cursor: pointer;
     border-bottom: 1px dotted rgba(224, 224, 224, 0.5);
@@ -107,8 +288,60 @@ body {
 }
 
 #word-definition a:hover {
-    color: #bb86fc; /* Highlight color on hover */
+    color: #bb86fc;
     border-bottom-color: #bb86fc;
+}
+
+.related-words-container {
+    margin-top: 2rem;
+}
+
+.related-words-container h4 {
+    color: #bb86fc;
+    border-bottom: 1px solid #333;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    transition: color 0.3s ease, border-bottom-color 0.3s ease;
+}
+
+.related-words-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.related-words-list a {
+    background: #333;
+    color: #e0e0e0;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.related-words-list a:hover {
+    background: #bb86fc;
+    color: #121212;
+    transform: translateY(-2px);
+}
+
+.etymology-container {
+    margin-top: 2rem;
+}
+
+.etymology-container h4 {
+    color: #bb86fc;
+    border-bottom: 1px solid #333;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    transition: color 0.3s ease, border-bottom-color 0.3s ease;
+}
+
+.etymology-container p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #a0a0a0;
+    transition: color 0.3s ease;
 }
 
 .loader-container {
@@ -137,4 +370,136 @@ body {
     background: #2a2a2a;
     border-radius: 10px;
     margin-top: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.theme-toggle {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    background: none;
+    border: none;
+    color: #e0e0e0;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: scale(1.1);
+}
+
+.theme-toggle:active {
+    transform: scale(0.9);
+}
+
+/* Light Theme */
+body.light-theme {
+    background: #f0f2f5;
+    color: #333;
+}
+
+body.light-theme .search-container {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .search-box {
+    background: #f8f8f8;
+    color: #333;
+}
+
+body.light-theme .search-button {
+    background: #6200ee;
+    color: #ffffff;
+}
+
+body.light-theme .search-button:hover {
+    background: #3700b3;
+}
+
+body.light-theme #word-title {
+    color: #6200ee;
+}
+
+body.light-theme #word-phonetic {
+    color: #666;
+}
+
+body.light-theme #word-definition a {
+    color: #333;
+    border-bottom-color: rgba(51, 51, 51, 0.5);
+}
+
+body.light-theme #word-definition a:hover {
+    color: #6200ee;
+    border-bottom-color: #6200ee;
+}
+
+body.light-theme .audio-button {
+    color: #6200ee;
+}
+
+body.light-theme .audio-button:hover {
+    color: #3700b3;
+}
+
+body.light-theme .related-words-container h4,
+body.light-theme .history-container h4,
+body.light-theme .favorites-container h4,
+body.light-theme .etymology-container h4 {
+    color: #6200ee;
+    border-bottom-color: #eee;
+}
+
+body.light-theme .related-words-list a,
+body.light-theme .history-container .related-words-list a,
+body.light-theme .favorites-container .related-words-list a {
+    background: #e0e0e0;
+    color: #333;
+}
+
+body.light-theme .related-words-list a:hover,
+body.light-theme .history-container .related-words-list a:hover,
+body.light-theme .favorites-container .related-words-list a:hover {
+    background: #6200ee;
+    color: #ffffff;
+}
+
+body.light-theme .favorite-button {
+    color: #666;
+}
+
+body.light-theme .favorite-button.favorited {
+    color: #ff4d4d;
+    fill: #ff4d4d;
+}
+
+body.light-theme .favorite-button:hover {
+    color: #6200ee;
+}
+
+body.light-theme .loader {
+    border-top-color: #6200ee;
+}
+
+body.light-theme .theme-toggle {
+    color: #333;
+}
+
+body.light-theme .theme-toggle:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .theme-toggle {
+        top: 0.5rem;
+        right: 0.5rem;
+        padding: 0.3rem;
+    }
+
+    .search-container {
+        margin-top: 3rem; /* Add space for the toggle */
+    }
 }
